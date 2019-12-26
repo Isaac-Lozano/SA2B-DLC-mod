@@ -1,0 +1,19 @@
+[package]
+name = "sa2_dlc_mod"
+version = "0.1.0"
+authors = ["Isaac Lozano <Isaac-Lozano@users.noreply.github.com>"]
+edition = "2018"
+
+[lib]
+name = "sa2_button_mod"
+crate-type = ["cdylib"]
+
+[dependencies]
+byteorder = "1.3"
+
+[dependencies.prs_util]
+path = "../prs_util"
+
+[dependencies.winapi]
+version = "0.3.6"
+features = ["psapi", "memoryapi", "processthreadsapi"]
