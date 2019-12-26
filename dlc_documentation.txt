@@ -1,0 +1,26 @@
+NOTE: This is a very roughly made description of the structure of the DLC file.
+
+(0x0000+0x0004 means starts at offset 0x0000 and has size 0x0004)
+
+SA2 Kart DLC format:
+Dreamcast VMU Header (Documented here[http://mc.pp.se/dc/vms/fileheader.html])
+The entire DLC file (excluding header) is tossed into memory at 0x8CB00000.
+(Offsets here will be relative to the DLC file start (after headers))
+0x0000+0x0004 DLC type? (PC code has cases for 0x03 and 0x04. Non Kart stuff (which are just unlock keys) seems to just have an 8-digit ASCII number in here?)
+0x0004+0x0014 Five pointers to string pointer arrays (5 elements in each array. DLC name, DLC Type, DLC Stage, DLC description)
+0x0018+0x0020 2x4 level IDs. (Practically, just the first ID is 0x46 = 70 = Kart stage) (Might just be a list of levels that need to be unlocked)
+0x0038+0x0004 Pointer to PRS file. (No length to go along with this, strangely. Though PRS files have an ending sequence, so that should be fine.)
+
+PRS file:
+(Offsets here are relative to PRS file start)
+0x0000+0x0004 Offset to KartDlcTrack offset
+0x0004+0x0008 (Offset, Len) pair for set file
+0x000c+0x0008 (Offset, Len) pair for track data
+0x0014+0x0008 (Offset, Len) pair for kart data
+
+Kart Data:
+(Offsets here are relative to Kart Data start)
+0x0004+0x0008 (Offset, Len) pair for model data
+0x000c+0x0008 (Offset, Len) pair for TEXLIST_thing
+0x0014+0x0008 (Offset, Len) pair for texture data
+
